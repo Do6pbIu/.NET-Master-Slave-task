@@ -1,0 +1,5 @@
+D:\PavelKolesnikov\MasterSlaveTask\UserStorage\bin\Debug\UserStorage.dll
+D:\PavelKolesnikov\MasterSlaveTask\UserStorage\bin\Debug\UserStorage.pdb
+D:\PavelKolesnikov\MasterSlaveTask\UserStorage\obj\Debug\UserStorage.csprojResolveAssemblyReference.cache
+D:\PavelKolesnikov\MasterSlaveTask\UserStorage\obj\Debug\UserStorage.dll
+D:\PavelKolesnikov\MasterSlaveTask\UserStorage\obj\Debug\UserStorage.pdb

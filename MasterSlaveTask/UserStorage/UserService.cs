@@ -1,24 +1,35 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Runtime.Serialization.Formatters.Soap;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Serialization;
 
 namespace UserStorage
 {
     [Serializable]
     public class UserService
     {
+        [NonSerialized]
         private IList<User> users;
+
+        //this field is need for soap serialisation
+        private User[] userArray;
+
+        //this property should be removed after testing!
+        public IList<User> Users { get { return users; } }
 
         [NonSerialized]
         private IIdGenerator idGenerator;
 
         [NonSerialized]
-        private IUserValidator userValidator;
-
+        private IUserValidator userValidator;        
+        
         private string lastId;
         #region Constructors
+
         public UserService(IIdGenerator generator, IUserValidator validator, IList<User> existingUsers)
         {
             if (existingUsers == null || generator == null || validator == null)
@@ -37,7 +48,10 @@ namespace UserStorage
             userValidator = validator;
         }
 
-        private UserService() { }
+        /// <summary>
+        /// Public default cousnturcor for XLM serialization
+        /// </summary>
+        public UserService() { }
         #endregion
 
         #region CRUDuser
@@ -86,6 +100,18 @@ namespace UserStorage
         /// <param name="match"></param>
         /// <returns></returns>
         public IEnumerable<User> SearchForUser(Func<User, bool> match) => users.Where(match);
+
+        /// <summary>
+        /// Searches user with specified Id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public User GetUserById(string id)
+        {
+            if (id == null) throw new ArgumentException();
+            User user = users.Where(u => u.Id == id).FirstOrDefault();
+            return user;
+        }
         #endregion
 
         /// <summary>
@@ -97,7 +123,10 @@ namespace UserStorage
             if (newGenerator == null)
                 throw new ArgumentException();
             else
+            {
+                newGenerator.LastId = lastId;
                 idGenerator = newGenerator;
+            }
         }
 
         /// <summary>
@@ -110,5 +139,37 @@ namespace UserStorage
             else
                 userValidator = newValidator;
         }        
+
+        /// <summary>
+        /// Stores state to file in disk using SoapFormatter
+        /// </summary>
+        /// <param name="path">Path to a file</param>
+        public void SaveStateToFile(string path)
+        {
+            if (path == null) throw new ArgumentException();
+            userArray = users.ToArray();
+            using (FileStream fs = new FileStream(path, FileMode.OpenOrCreate))
+            {
+                SoapFormatter formatter = new SoapFormatter();
+                formatter.Serialize(fs, this);
+                Console.WriteLine("Объект сериализован");
+            }
+        }
+
+        /// <summary>
+        /// Loads state from file using SoapFormatter
+        /// </summary>
+        /// <param name="path">Path to a file</param>
+        public void LoadFromFile(string path)
+        {
+            if (path == null) throw new ArgumentException();
+            using (FileStream fs = new FileStream(path, FileMode.Open))
+            {
+                SoapFormatter formatter = new SoapFormatter();
+                UserService loadedService = (UserService)formatter.Deserialize(fs);
+                users = loadedService.userArray.ToList();
+                lastId = loadedService.lastId;
+            }
+        }
     }
 }

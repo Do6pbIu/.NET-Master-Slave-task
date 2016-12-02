@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Serialization;
+using System.Security.Permissions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -11,16 +13,17 @@ namespace UserStorage
     {
         public string FirstName { get; private set; }
         public string LastName { get; private set; }
-        public string Id { get;}
+        public string Id { get; }
         public Gender Sex { get; private set; }
-        public List<VisaRecord> visaCards { get; private set; }
+        
+        public VisaRecord[] visaCards { get; private set; }
 
         #region Equals
         public bool Equals(User other)
         {
             if (other == null)
                 return false;
-            if (this.Id == other.Id) return true;
+            if (Id == other.Id) return true;
             else
                 return false;
         }
@@ -47,50 +50,41 @@ namespace UserStorage
                                     + FirstName.ToString() + " " 
                                     +LastName.ToString()+" "
                                     +Sex.ToString()+" "
-                                    +visaCards.Count.ToString();            
+                                    +visaCards.Length.ToString();            
         }
         #endregion
 
         #region Constructors
-        private User() { }
+        /// <summary>
+        /// Public default constructor for XML serialisation
+        /// </summary>
+        public User() { }
 
-        public User(string fName, string lName, string Id, Gender sex)
+        public User(string fName, string lName, string id, Gender sex)
         {
-            if (fName == null || lName == null || Id == null) throw new ArgumentException();
-            visaCards = new List<VisaRecord>();
+            if (fName == null || lName == null || id == null) throw new ArgumentException();
+            FirstName = fName;
+            LastName = lName;
+            Id = id;
+            Sex = sex;
+            visaCards = new VisaRecord[5]; // need to discuss the number of cards with the manager 
         }
         #endregion
 
-        public void ChangeGender(Gender newSex)
-        {
-            this.Sex = newSex;
-        }
-
+        // need to discuss the method of adding cards with the manager 
         public void AddVisaCard(VisaRecord newVisa)
         {
-            if (visaCards.IndexOf(newVisa) == -1) visaCards.Add(newVisa);
+            if (!visaCards.Contains(newVisa))
+            {
+                for(int i=0;i<visaCards.Length;i++)
+                {
+                    if (visaCards[i].EndDate < DateTime.Now)
+                        visaCards[i] = newVisa;
+                }
+            }
         }
     }
-
-    public struct VisaRecord
-    {
-        private string country;
-        private DateTime startDate;
-        private DateTime endDate;
-
-        public VisaRecord (string ctr, DateTime sDate, DateTime eDate)
-        {
-            if (ctr == null || eDate < DateTime.Now) throw new ArgumentException();            
-            country = ctr;
-            startDate = sDate;
-            endDate = eDate;
-        }
-
-        public string Country => country;
-        public DateTime StartDate => startDate;
-        public DateTime EndDate => endDate;
-    }
-
+    
     public enum Gender
     {
         Male,

@@ -6,8 +6,16 @@ using System.Threading.Tasks;
 
 namespace UserStorage
 {
+    /// <summary>
+    /// Validates user before adding him to storage
+    /// </summary>
     public interface IUserValidator
     {
-        bool UserIsValid(User user);
+        /// <summary>
+        /// Validates user(unique id and allowable names)
+        /// </summary>
+        /// <param name="user"></param>
+        /// <returns>true if user is valid, otherwise false</returns>
+        bool UserIsValid(User user);        
     }
 }

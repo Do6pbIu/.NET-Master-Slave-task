@@ -1,0 +1,8 @@
+D:\PavelKolesnikov\MasterSlaveTask\StorageTest\bin\Debug\StorageTest.dll
+D:\PavelKolesnikov\MasterSlaveTask\StorageTest\bin\Debug\StorageTest.pdb
+D:\PavelKolesnikov\MasterSlaveTask\StorageTest\bin\Debug\Microsoft.VisualStudio.QualityTools.UnitTestFramework.dll
+D:\PavelKolesnikov\MasterSlaveTask\StorageTest\bin\Debug\UserStorage.dll
+D:\PavelKolesnikov\MasterSlaveTask\StorageTest\bin\Debug\UserStorage.pdb
+D:\PavelKolesnikov\MasterSlaveTask\StorageTest\obj\Debug\StorageTest.csprojResolveAssemblyReference.cache
+D:\PavelKolesnikov\MasterSlaveTask\StorageTest\obj\Debug\StorageTest.dll
+D:\PavelKolesnikov\MasterSlaveTask\StorageTest\obj\Debug\StorageTest.pdb
