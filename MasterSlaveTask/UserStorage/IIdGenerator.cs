@@ -15,8 +15,11 @@ namespace UserStorage
         /// Generates next unique Id
         /// </summary>
         /// <returns></returns>
-        string NextId();       
-        
+        string NextId();
+
+        /// <summary>
+        /// Value of the last generated id
+        /// </summary>
         string LastId { get; set; }         
     }
 }
