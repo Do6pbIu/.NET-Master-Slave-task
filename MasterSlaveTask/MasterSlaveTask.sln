@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UserStorage", "UserStorage\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StorageTest", "StorageTest\StorageTest.csproj", "{5D56881B-AC25-4827-B944-3DB1B5CEE05E}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MasterSlave", "MasterSlave\MasterSlave.csproj", "{F7630995-2476-4F40-95AC-1D217FC4FA3D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{5D56881B-AC25-4827-B944-3DB1B5CEE05E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5D56881B-AC25-4827-B944-3DB1B5CEE05E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5D56881B-AC25-4827-B944-3DB1B5CEE05E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F7630995-2476-4F40-95AC-1D217FC4FA3D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F7630995-2476-4F40-95AC-1D217FC4FA3D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F7630995-2476-4F40-95AC-1D217FC4FA3D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F7630995-2476-4F40-95AC-1D217FC4FA3D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
