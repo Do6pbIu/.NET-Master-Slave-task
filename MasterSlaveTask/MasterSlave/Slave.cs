@@ -31,6 +31,7 @@ namespace MasterSlave
         {
             if ((idGenerator == null) || (userValidator == null)) throw new ArgumentNullException();
             _service = new UserService(idGenerator, userValidator, true);
+            _adress = new Address("localhost", 51111);
         }
         #endregion
 
@@ -75,7 +76,7 @@ namespace MasterSlave
             return null;
         }
 
-        private void ListenToMaster()
+        public void ListenToMaster()
         {
             TcpListener listener = new TcpListener(IPAddress.Any, _adress.Port);
             listener.Start();

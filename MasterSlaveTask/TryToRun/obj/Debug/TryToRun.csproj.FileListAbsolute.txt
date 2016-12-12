@@ -1,0 +1,10 @@
+D:\PavelKolesnikov\.NET-Master-Slave-task-master\MasterSlaveTask\TryToRun\bin\Debug\TryToRun.exe.config
+D:\PavelKolesnikov\.NET-Master-Slave-task-master\MasterSlaveTask\TryToRun\bin\Debug\TryToRun.exe
+D:\PavelKolesnikov\.NET-Master-Slave-task-master\MasterSlaveTask\TryToRun\bin\Debug\TryToRun.pdb
+D:\PavelKolesnikov\.NET-Master-Slave-task-master\MasterSlaveTask\TryToRun\bin\Debug\MasterSlave.dll
+D:\PavelKolesnikov\.NET-Master-Slave-task-master\MasterSlaveTask\TryToRun\bin\Debug\UserStorage.dll
+D:\PavelKolesnikov\.NET-Master-Slave-task-master\MasterSlaveTask\TryToRun\bin\Debug\MasterSlave.pdb
+D:\PavelKolesnikov\.NET-Master-Slave-task-master\MasterSlaveTask\TryToRun\bin\Debug\UserStorage.pdb
+D:\PavelKolesnikov\.NET-Master-Slave-task-master\MasterSlaveTask\TryToRun\obj\Debug\TryToRun.csprojResolveAssemblyReference.cache
+D:\PavelKolesnikov\.NET-Master-Slave-task-master\MasterSlaveTask\TryToRun\obj\Debug\TryToRun.exe
+D:\PavelKolesnikov\.NET-Master-Slave-task-master\MasterSlaveTask\TryToRun\obj\Debug\TryToRun.pdb

@@ -1,0 +1,7 @@
+D:\PavelKolesnikov\.NET-Master-Slave-task-master\MasterSlaveTask\MasterSlave\bin\Debug\MasterSlave.dll
+D:\PavelKolesnikov\.NET-Master-Slave-task-master\MasterSlaveTask\MasterSlave\bin\Debug\MasterSlave.pdb
+D:\PavelKolesnikov\.NET-Master-Slave-task-master\MasterSlaveTask\MasterSlave\bin\Debug\UserStorage.dll
+D:\PavelKolesnikov\.NET-Master-Slave-task-master\MasterSlaveTask\MasterSlave\bin\Debug\UserStorage.pdb
+D:\PavelKolesnikov\.NET-Master-Slave-task-master\MasterSlaveTask\MasterSlave\obj\Debug\MasterSlave.csprojResolveAssemblyReference.cache
+D:\PavelKolesnikov\.NET-Master-Slave-task-master\MasterSlaveTask\MasterSlave\obj\Debug\MasterSlave.dll
+D:\PavelKolesnikov\.NET-Master-Slave-task-master\MasterSlaveTask\MasterSlave\obj\Debug\MasterSlave.pdb

@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StorageTest", "StorageTest\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MasterSlave", "MasterSlave\MasterSlave.csproj", "{F7630995-2476-4F40-95AC-1D217FC4FA3D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TryToRun", "TryToRun\TryToRun.csproj", "{04AB8D07-34AC-4BD6-A0F4-E18DCBE4CF7F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{F7630995-2476-4F40-95AC-1D217FC4FA3D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F7630995-2476-4F40-95AC-1D217FC4FA3D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F7630995-2476-4F40-95AC-1D217FC4FA3D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{04AB8D07-34AC-4BD6-A0F4-E18DCBE4CF7F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{04AB8D07-34AC-4BD6-A0F4-E18DCBE4CF7F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{04AB8D07-34AC-4BD6-A0F4-E18DCBE4CF7F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{04AB8D07-34AC-4BD6-A0F4-E18DCBE4CF7F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

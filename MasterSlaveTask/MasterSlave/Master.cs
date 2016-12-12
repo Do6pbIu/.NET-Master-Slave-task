@@ -4,11 +4,24 @@ using System.Linq;
 using System.Net.Sockets;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using UserStorage;
 
 namespace MasterSlave
 {
+    //internal class SlaveMessage
+    //{
+    //    public Message Message { get; set; }
+    //    public TcpClient Slave { get; set; }
+
+    //    public SlaveMessage(Message msg, TcpClient slv)
+    //    {
+    //        Message = msg;
+    //        Slave = slv;
+    //    }
+    //}
+
     public sealed class Master
     {
         private IUserService _service;
@@ -26,12 +39,15 @@ namespace MasterSlave
             _service = new UserService(idGenerator, userValidator, true);
             _pathToUsers = path;
             _service.LoadFromFile(_pathToUsers);
+            _slaves.Add(new TcpClient("localhost", 51111));
         }
 
         public Master(IIdGenerator idGenerator, IUserValidator userValidator)
         {
+            _pathToUsers = "users.soap";
             if ((idGenerator == null) || (userValidator == null)) throw new ArgumentNullException();
             _service = new UserService(idGenerator, userValidator, true);
+            //_slaves.Add(new TcpClient("localhost", 51111));
         }
         #endregion
 
@@ -115,7 +131,8 @@ namespace MasterSlave
         public void EstablishConnectionWithSlaves()
         {
             _slaves = new List<TcpClient>();
-            foreach(Address adr in _address)
+            _slaves.Add(new TcpClient("localhost", 51111));
+            foreach (Address adr in _address)
             {
                 try
                 {
@@ -129,17 +146,22 @@ namespace MasterSlave
             }
         }
 
+        private void NotifySlave(Message message, TcpClient slave)
+        {
+            using (NetworkStream n = slave.GetStream())
+            {
+                var formatter = new BinaryFormatter();
+                formatter.Serialize(n, message);
+            }
+        }
+                
         private void NotifySlaves(Message message)
         {
             foreach (TcpClient slave in _slaves)
             {
                 try
                 {
-                    using (NetworkStream n = slave.GetStream())
-                    {
-                        var formatter = new BinaryFormatter();
-                        formatter.Serialize(n, message);
-                    } 
+                    Task.Run(() => NotifySlave(message, slave));
                 }
                 catch (Exception ex)
                 {
@@ -147,6 +169,8 @@ namespace MasterSlave
                 }
             }
         }
+
+
 
     }    
 }
