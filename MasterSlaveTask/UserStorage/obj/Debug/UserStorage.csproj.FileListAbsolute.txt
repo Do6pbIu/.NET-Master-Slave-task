@@ -8,3 +8,8 @@ D:\PavelKolesnikov\.NET-Master-Slave-task-master\MasterSlaveTask\UserStorage\bin
 D:\PavelKolesnikov\.NET-Master-Slave-task-master\MasterSlaveTask\UserStorage\obj\Debug\UserStorage.csprojResolveAssemblyReference.cache
 D:\PavelKolesnikov\.NET-Master-Slave-task-master\MasterSlaveTask\UserStorage\obj\Debug\UserStorage.dll
 D:\PavelKolesnikov\.NET-Master-Slave-task-master\MasterSlaveTask\UserStorage\obj\Debug\UserStorage.pdb
+e:\ckyrs\.NET-Master-Slave-task-master\MasterSlaveTask\UserStorage\bin\Debug\UserStorage.dll
+e:\ckyrs\.NET-Master-Slave-task-master\MasterSlaveTask\UserStorage\bin\Debug\UserStorage.pdb
+e:\ckyrs\.NET-Master-Slave-task-master\MasterSlaveTask\UserStorage\obj\Debug\UserStorage.csprojResolveAssemblyReference.cache
+e:\ckyrs\.NET-Master-Slave-task-master\MasterSlaveTask\UserStorage\obj\Debug\UserStorage.dll
+e:\ckyrs\.NET-Master-Slave-task-master\MasterSlaveTask\UserStorage\obj\Debug\UserStorage.pdb

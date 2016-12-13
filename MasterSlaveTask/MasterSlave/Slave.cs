@@ -76,7 +76,7 @@ namespace MasterSlave
             return null;
         }
 
-        public void ListenToMaster()
+        private void Listen()
         {
             TcpListener listener = new TcpListener(IPAddress.Any, _adress.Port);
             listener.Start();
@@ -91,16 +91,25 @@ namespace MasterSlave
             {
                 //write exception to logFile
             }
+            finally
+            {
+                //listener.Stop();
+            }
+        }
+
+        public void ListenToMaster()
+        {
+            Task.Run(() => Listen());
         }
 
         private void ReceiveMessage(TcpClient client)
         {
             try
             {
+               // using (client)
                 using (NetworkStream n = client.GetStream())
                 {
                     var formatter = new BinaryFormatter();
-                    //User user = (User)formatter.Deserialize(n);
                     Message msg = (Message)formatter.Deserialize(n);
                     ProcessMessage(msg);
                 }

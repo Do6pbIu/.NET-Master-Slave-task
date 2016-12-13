@@ -8,3 +8,13 @@ D:\PavelKolesnikov\.NET-Master-Slave-task-master\MasterSlaveTask\TryToRun\bin\De
 D:\PavelKolesnikov\.NET-Master-Slave-task-master\MasterSlaveTask\TryToRun\obj\Debug\TryToRun.csprojResolveAssemblyReference.cache
 D:\PavelKolesnikov\.NET-Master-Slave-task-master\MasterSlaveTask\TryToRun\obj\Debug\TryToRun.exe
 D:\PavelKolesnikov\.NET-Master-Slave-task-master\MasterSlaveTask\TryToRun\obj\Debug\TryToRun.pdb
+e:\ckyrs\.NET-Master-Slave-task-master\MasterSlaveTask\TryToRun\bin\Debug\TryToRun.exe.config
+e:\ckyrs\.NET-Master-Slave-task-master\MasterSlaveTask\TryToRun\obj\Debug\TryToRun.exe
+e:\ckyrs\.NET-Master-Slave-task-master\MasterSlaveTask\TryToRun\obj\Debug\TryToRun.pdb
+e:\ckyrs\.NET-Master-Slave-task-master\MasterSlaveTask\TryToRun\bin\Debug\TryToRun.exe
+e:\ckyrs\.NET-Master-Slave-task-master\MasterSlaveTask\TryToRun\bin\Debug\TryToRun.pdb
+e:\ckyrs\.NET-Master-Slave-task-master\MasterSlaveTask\TryToRun\bin\Debug\MasterSlave.dll
+e:\ckyrs\.NET-Master-Slave-task-master\MasterSlaveTask\TryToRun\bin\Debug\UserStorage.dll
+e:\ckyrs\.NET-Master-Slave-task-master\MasterSlaveTask\TryToRun\bin\Debug\MasterSlave.pdb
+e:\ckyrs\.NET-Master-Slave-task-master\MasterSlaveTask\TryToRun\bin\Debug\UserStorage.pdb
+e:\ckyrs\.NET-Master-Slave-task-master\MasterSlaveTask\TryToRun\obj\Debug\TryToRun.csprojResolveAssemblyReference.cache

@@ -10,18 +10,6 @@ using UserStorage;
 
 namespace MasterSlave
 {
-    //internal class SlaveMessage
-    //{
-    //    public Message Message { get; set; }
-    //    public TcpClient Slave { get; set; }
-
-    //    public SlaveMessage(Message msg, TcpClient slv)
-    //    {
-    //        Message = msg;
-    //        Slave = slv;
-    //    }
-    //}
-
     public sealed class Master
     {
         private IUserService _service;
@@ -29,17 +17,14 @@ namespace MasterSlave
         private string _pathToUsers;
 
         private List<Address> _address;
-
-        private List<TcpClient> _slaves;
-
+        
         #region Constructors
         public Master(IIdGenerator idGenerator, IUserValidator userValidator, string path)
         {
             if ((idGenerator == null) || (userValidator == null) || (path == null)) throw new ArgumentNullException();
             _service = new UserService(idGenerator, userValidator, true);
             _pathToUsers = path;
-            _service.LoadFromFile(_pathToUsers);
-            _slaves.Add(new TcpClient("localhost", 51111));
+            _service.LoadFromFile(_pathToUsers);            
         }
 
         public Master(IIdGenerator idGenerator, IUserValidator userValidator)
@@ -130,24 +115,13 @@ namespace MasterSlave
 
         public void EstablishConnectionWithSlaves()
         {
-            _slaves = new List<TcpClient>();
-            _slaves.Add(new TcpClient("localhost", 51111));
-            foreach (Address adr in _address)
-            {
-                try
-                {
-                    TcpClient client = new TcpClient(adr.HostName, adr.Port);
-                    _slaves.Add(client);
-                }
-                catch (Exception ex)
-                {
-                    //write exception to logFile
-                }
-            }
+            _address = new List<Address>();
+            _address.Add(new Address("localhost", 51111));            
         }
 
-        private void NotifySlave(Message message, TcpClient slave)
+        private void NotifySlave(Message message, Address addr)
         {
+            using (TcpClient slave = new TcpClient(addr.HostName,addr.Port))
             using (NetworkStream n = slave.GetStream())
             {
                 var formatter = new BinaryFormatter();
@@ -157,17 +131,18 @@ namespace MasterSlave
                 
         private void NotifySlaves(Message message)
         {
-            foreach (TcpClient slave in _slaves)
+            foreach (Address addr in _address)
             {
                 try
                 {
-                    Task.Run(() => NotifySlave(message, slave));
+                    Task.Run(() => NotifySlave(message, addr));
+                    //NotifySlave(message, addr);
                 }
                 catch (Exception ex)
                 {
                     //write excetrion to logFile
                 }
-            }
+            }            
         }
 
 

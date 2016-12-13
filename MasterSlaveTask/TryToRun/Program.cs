@@ -56,18 +56,27 @@ namespace TryToRun
             Validator validator = new Validator();
             Generator generator = new Generator();
 
-            Slave slave = new Slave(generator, validator);
+            Slave sl = new Slave(generator, validator);
             Master master = new Master(generator, validator);
 
-            //new Thread(Server).Start();
-            //master.EstablishConnectionWithSlaves();
-            //slave.ListenToMaster();
+            new Thread(sl.ListenToMaster).Start();
+            
+            Thread.Sleep(1000);
+            master.EstablishConnectionWithSlaves();
 
             master.AddUser(john);
+           // Thread.Sleep(4000);
             master.AddUser(bill);
+            //Thread.Sleep(2000);
             master.AddUser(barrak);
+            //Thread.Sleep(2000);
             master.AddUser(george);
+            //Thread.Sleep(2000);
             master.AddUser(stan);
+            master.DeleteUser(bill);
+            master.DeleteUser(stan);
+            Thread.Sleep(3000);
+                       
             Console.ReadLine();
         }
     }
