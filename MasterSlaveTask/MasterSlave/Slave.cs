@@ -5,6 +5,7 @@ using System.Net;
 using System.Net.Sockets;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using UserStorage;
 
@@ -12,6 +13,8 @@ namespace MasterSlave
 {
     public sealed class Slave
     {
+        private ReaderWriterLockSlim  _serviceLock = new ReaderWriterLockSlim();
+
         private Address _adress;
 
         private IUserService _service;
@@ -32,6 +35,13 @@ namespace MasterSlave
             if ((idGenerator == null) || (userValidator == null)) throw new ArgumentNullException();
             _service = new UserService(idGenerator, userValidator, true);
             _adress = new Address("localhost", 51111);
+        }
+
+        public Slave(IIdGenerator idGenerator, IUserValidator userValidator, Address addr)
+        {
+            if ((idGenerator == null) || (userValidator == null)) throw new ArgumentNullException();
+            _service = new UserService(idGenerator, userValidator, true);
+            _adress = addr;
         }
         #endregion
 
@@ -54,11 +64,34 @@ namespace MasterSlave
         {
             try
             {
+                _serviceLock.EnterReadLock();
                 return _service.GetUserById(id);
+            }            
+            catch (Exception ex)
+            {
+                //write exception to logFile
+            }
+            finally
+            {
+                _serviceLock.ExitReadLock();
+            }
+            return null;
+        }       
+
+        public Task<User> GetUserByIdAsync(string id)
+        {
+            try
+            {
+                _serviceLock.EnterReadLock();
+                return Task.Run(() => _service.GetUserById(id));                   
             }
             catch (Exception ex)
             {
                 //write exception to logFile
+            }
+            finally
+            {
+                _serviceLock.ExitReadLock();
             }
             return null;
         }
@@ -67,11 +100,34 @@ namespace MasterSlave
         {
             try
             {
+                _serviceLock.EnterReadLock();
                 return _service.SearchForUser(match);
             }
             catch (Exception ex)
             {
                 //write exception to logFile
+            }
+            finally
+            {
+                _serviceLock.ExitReadLock();
+            }
+            return null;
+        }
+
+        public Task<IEnumerable<User>> SearchForUserAsync(Func<User, bool> match)
+        {
+            try
+            {
+                _serviceLock.EnterReadLock();
+                return Task.Run(() => _service.SearchForUser(match));
+            }
+            catch (Exception ex)
+            {
+                //write exception to logFile
+            }
+            finally
+            {
+                _serviceLock.ExitReadLock();
             }
             return null;
         }
@@ -93,10 +149,10 @@ namespace MasterSlave
             }
             finally
             {
-                //listener.Stop();
+                listener.Stop();
             }
         }
-
+       
         public void ListenToMaster()
         {
             Task.Run(() => Listen());
@@ -127,10 +183,26 @@ namespace MasterSlave
                 switch (msg.Command)
                 {
                     case Command.Create:
-                        _service.AddUser(msg.User);
+                        try
+                        {
+                            _serviceLock.EnterWriteLock();
+                            _service.AddUser(msg.User);
+                        }
+                        finally
+                        {
+                            _serviceLock.ExitWriteLock();
+                        }
                         break;
                     case Command.Delete:
-                        _service.DeleteUser(msg.User);
+                        try
+                        {
+                            _serviceLock.EnterWriteLock();
+                            _service.DeleteUser(msg.User);
+                        }
+                        finally
+                        {
+                            _serviceLock.ExitWriteLock();
+                        }
                         break;
                     default:
                         throw new ArgumentException();                        

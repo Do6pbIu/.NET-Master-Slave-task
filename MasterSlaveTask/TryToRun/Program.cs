@@ -44,40 +44,76 @@ namespace TryToRun
     }
 
     class Program
-    {        
+    {
+        static User[] users = { new User("John", "Smith", "1", Gender.Male),
+                                new User("Bill", "Smith", "2", Gender.Male),
+                                new User("Barrak", "Smith", "3", Gender.Male),
+                                new User("george", "Smith", "4", Gender.Male),
+                                new User("Stan", "Smith", "5", Gender.Male)};
+
         static void Main(string[] args)
         {
-            User john = new User("John", "Smith", "1", Gender.Male);
-            User bill = new User("Bill", "Smith", "2", Gender.Male);
-            User barrak = new User("Barrak", "Smith", "3", Gender.Male);
-            User george = new User("george", "Smith", "4", Gender.Male);
-            User stan = new User("Stan", "Smith", "5", Gender.Male);
-
+            
             Validator validator = new Validator();
             Generator generator = new Generator();
-
-            Slave sl = new Slave(generator, validator);
-            Master master = new Master(generator, validator);
-
-            new Thread(sl.ListenToMaster).Start();
             
+            Slave sl1 = new Slave(generator, validator);
+            Slave sl2 = new Slave(generator, validator, new Address("localhost", 51112));
+            Master master = new Master(generator, validator);
+            
+            sl1.ListenToMaster();
+            sl2.ListenToMaster();
+
             Thread.Sleep(1000);
+
             master.EstablishConnectionWithSlaves();
 
-            master.AddUser(john);
-           // Thread.Sleep(4000);
-            master.AddUser(bill);
-            //Thread.Sleep(2000);
-            master.AddUser(barrak);
-            //Thread.Sleep(2000);
-            master.AddUser(george);
-            //Thread.Sleep(2000);
-            master.AddUser(stan);
-            master.DeleteUser(bill);
-            master.DeleteUser(stan);
-            Thread.Sleep(3000);
+            Task.Run(() => PrintUsers(sl1));
+            Task.Run(() => PrintUsersAsync(sl2));
+
+            while (true)
+            {
+                for (int i = 0; i < 5; i++)
+                {
+                    master.AddUser(users[i]);
+                }
+                Thread.Sleep(1000);
+                for (int i = 0; i < 5; i++)
+                {
+                    master.DeleteUser(users[i]);
+                }
+                Thread.Sleep(1000);
+            }
+            
                        
             Console.ReadLine();
+        }
+
+        static void PrintUsers(Slave slave)
+        {
+            while (true)
+            {
+                List<User> users = slave.SearchForUser(u => u.Sex == Gender.Male).ToList();
+                foreach (User user in users)
+                {
+                    Console.WriteLine(user.ToString());
+                }
+                Thread.Sleep(1000);
+            }
+        }
+
+        static async void PrintUsersAsync(Slave slave)
+        {
+            while (true)
+            {
+                var users = await slave.SearchForUserAsync(u => u.Sex == Gender.Male);
+                List<User> lusers = users.ToList();
+                foreach (User user in lusers)
+                {
+                    Console.WriteLine("from async slave2" + user.ToString());
+                }
+                Thread.Sleep(1000);
+            }
         }
     }
 }

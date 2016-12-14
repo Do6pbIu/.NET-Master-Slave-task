@@ -34,6 +34,14 @@ namespace MasterSlave
             _service = new UserService(idGenerator, userValidator, true);
             //_slaves.Add(new TcpClient("localhost", 51111));
         }
+
+        public Master(IIdGenerator idGenerator, IUserValidator userValidator, List<Address> addrs)
+        {
+            _pathToUsers = "users.soap";
+            if ((idGenerator == null) || (userValidator == null)) throw new ArgumentNullException();
+            _service = new UserService(idGenerator, userValidator, true);
+            _address = addrs;
+        }
         #endregion
 
         #region UserServiceState
@@ -116,7 +124,8 @@ namespace MasterSlave
         public void EstablishConnectionWithSlaves()
         {
             _address = new List<Address>();
-            _address.Add(new Address("localhost", 51111));            
+            _address.Add(new Address("localhost", 51111));
+            _address.Add(new Address("localhost", 51112));
         }
 
         private void NotifySlave(Message message, Address addr)
@@ -144,8 +153,5 @@ namespace MasterSlave
                 }
             }            
         }
-
-
-
     }    
 }
