@@ -17,12 +17,14 @@ namespace MasterSlave
         private string _pathToUsers;
 
         private List<Address> _address;
-        
+
+        private ReaderWriterLockSlim _serviceLock = new ReaderWriterLockSlim();
+
         #region Constructors
         public Master(IIdGenerator idGenerator, IUserValidator userValidator, string path)
         {
             if ((idGenerator == null) || (userValidator == null) || (path == null)) throw new ArgumentNullException();
-            _service = new UserService(idGenerator, userValidator, true);
+            _service = new UserService(idGenerator, userValidator);
             _pathToUsers = path;
             _service.LoadFromFile(_pathToUsers);            
         }
@@ -31,15 +33,14 @@ namespace MasterSlave
         {
             _pathToUsers = "users.soap";
             if ((idGenerator == null) || (userValidator == null)) throw new ArgumentNullException();
-            _service = new UserService(idGenerator, userValidator, true);
-            //_slaves.Add(new TcpClient("localhost", 51111));
+            _service = new UserService(idGenerator, userValidator);            
         }
 
         public Master(IIdGenerator idGenerator, IUserValidator userValidator, List<Address> addrs)
         {
             _pathToUsers = "users.soap";
             if ((idGenerator == null) || (userValidator == null)) throw new ArgumentNullException();
-            _service = new UserService(idGenerator, userValidator, true);
+            _service = new UserService(idGenerator, userValidator);
             _address = addrs;
         }
         #endregion
@@ -59,14 +60,38 @@ namespace MasterSlave
 
         public void SaveToFile(string path)
         {
-            if (path == null) throw new ArgumentNullException();
-            _service.SaveStateToFile(path);
+            if (path == null) throw new ArgumentNullException();            
+            try
+            {
+                _serviceLock.EnterWriteLock();
+                _service.SaveStateToFile(path);
+            }
+            catch (Exception ex)
+            {
+                //write exception to logFile
+            }
+            finally
+            {
+                _serviceLock.ExitWriteLock();
+            }
         }
 
         public void LoadFromFile(string path)
         {
             if (path == null) throw new ArgumentNullException();
-            _service.LoadFromFile(path);
+            try
+            {
+                _serviceLock.EnterWriteLock();
+                _service.LoadFromFile(path);
+            }
+            catch (Exception ex)
+            {
+                //write exception to logFile
+            }
+            finally
+            {
+                _serviceLock.ExitWriteLock();
+            }
         }
         #endregion
 
