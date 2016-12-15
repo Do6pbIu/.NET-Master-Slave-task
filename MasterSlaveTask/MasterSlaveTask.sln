@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MasterSlave", "MasterSlave\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TryToRun", "TryToRun\TryToRun.csproj", "{04AB8D07-34AC-4BD6-A0F4-E18DCBE4CF7F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WcfMasterSlaveService", "WcfMasterSlaveService\WcfMasterSlaveService.csproj", "{EDAAEE7C-0FFB-4A06-90D8-41B32210A147}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{04AB8D07-34AC-4BD6-A0F4-E18DCBE4CF7F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{04AB8D07-34AC-4BD6-A0F4-E18DCBE4CF7F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{04AB8D07-34AC-4BD6-A0F4-E18DCBE4CF7F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EDAAEE7C-0FFB-4A06-90D8-41B32210A147}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EDAAEE7C-0FFB-4A06-90D8-41B32210A147}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EDAAEE7C-0FFB-4A06-90D8-41B32210A147}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EDAAEE7C-0FFB-4A06-90D8-41B32210A147}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

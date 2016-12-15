@@ -1,0 +1,10 @@
+E:\ckyrs\.NET-Master-Slave-task-master\MasterSlaveTask\WcfMasterSlaveService\obj\Debug\WcfMasterSlaveService.csprojResolveAssemblyReference.cache
+E:\ckyrs\.NET-Master-Slave-task-master\MasterSlaveTask\WcfMasterSlaveService\bin\Debug\WcfMasterSlaveService.dll.config
+E:\ckyrs\.NET-Master-Slave-task-master\MasterSlaveTask\WcfMasterSlaveService\bin\Debug\WcfMasterSlaveService.dll
+E:\ckyrs\.NET-Master-Slave-task-master\MasterSlaveTask\WcfMasterSlaveService\bin\Debug\WcfMasterSlaveService.pdb
+E:\ckyrs\.NET-Master-Slave-task-master\MasterSlaveTask\WcfMasterSlaveService\bin\Debug\MasterSlave.dll
+E:\ckyrs\.NET-Master-Slave-task-master\MasterSlaveTask\WcfMasterSlaveService\bin\Debug\UserStorage.dll
+E:\ckyrs\.NET-Master-Slave-task-master\MasterSlaveTask\WcfMasterSlaveService\bin\Debug\MasterSlave.pdb
+E:\ckyrs\.NET-Master-Slave-task-master\MasterSlaveTask\WcfMasterSlaveService\bin\Debug\UserStorage.pdb
+E:\ckyrs\.NET-Master-Slave-task-master\MasterSlaveTask\WcfMasterSlaveService\obj\Debug\WcfMasterSlaveService.dll
+E:\ckyrs\.NET-Master-Slave-task-master\MasterSlaveTask\WcfMasterSlaveService\obj\Debug\WcfMasterSlaveService.pdb

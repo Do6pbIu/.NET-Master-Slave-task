@@ -14,9 +14,7 @@ namespace UserStorage
     {
         [NonSerialized]
         private IList<User> users;
-
-        private bool isMaster;
-
+        
         //this field is need for soap serialisation
         private User[] userArray;
 
@@ -33,30 +31,28 @@ namespace UserStorage
 
         #region Constructors
 
-        public UserService(IIdGenerator generator, IUserValidator validator, IList<User> existingUsers, bool master = false)
+        public UserService(IIdGenerator generator, IUserValidator validator, IList<User> existingUsers)
         {
             if (existingUsers == null || generator == null || validator == null)
                 throw new ArgumentException();
             users = existingUsers;
             idGenerator = generator;
-            userValidator = validator;
-            isMaster = master;
+            userValidator = validator;            
         }
 
-        public UserService(IIdGenerator generator, IUserValidator validator, bool master = false)
+        public UserService(IIdGenerator generator, IUserValidator validator)
         {
             if (generator == null || validator == null)
                 throw new ArgumentException();
             users = new List<User>();
             idGenerator = generator;
-            userValidator = validator;
-            isMaster = master;
+            userValidator = validator;            
         }
 
         /// <summary>
         /// Public default cousnturcor for XLM serialization
         /// </summary>
-        public UserService() { }
+        public UserService() { users = new List<User>(); }
         #endregion
 
         #region CRUDUser
@@ -84,8 +80,7 @@ namespace UserStorage
         /// <param name="sex"></param>
         /// <returns>User's id if he was added to storage</returns>
         public string CreateUser(string firstName, string lastName, Gender sex)
-        {
-            if (!isMaster) throw new InvalidOperationException();
+        {            
             User newUser = new User(firstName, lastName, idGenerator.NextId(), sex);
             lastId = newUser.Id;
             return (AddUser(newUser));
@@ -97,7 +92,6 @@ namespace UserStorage
         /// <param name="dUser"></param>
         public void DeleteUser(User dUser)
         {
-            if (!isMaster) throw new InvalidOperationException();
             if (dUser == null) throw new ArgumentNullException();
             users.Remove(dUser);
         }

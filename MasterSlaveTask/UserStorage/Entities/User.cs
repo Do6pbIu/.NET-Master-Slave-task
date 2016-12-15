@@ -71,7 +71,7 @@ namespace UserStorage
         }
         #endregion
 
-        // need to discuss the method of adding cards with the manager 
+        // need to discuss the method for adding cards with the manager 
         public void AddVisaCard(VisaRecord newVisa)
         {
             if (!visaCards.Contains(newVisa))
